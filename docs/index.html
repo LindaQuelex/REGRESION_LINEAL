@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pronóstico con ML para Series Temporales</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Pronóstico con ML para Series Temporales</h1>
+    
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".xlsx" required>
+        <button type="submit">Cargar y Pronosticar</button>
+    </form>
+    
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+</html>

@@ -8,8 +8,8 @@ from io import BytesIO
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = {'xlsx'}
+UPLOAD_FOLDER = 'tu_proyecto\\uploads'
+ALLOWED_EXTENSIONS = {'xlsx','cvs'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -45,15 +45,16 @@ def index():
             
             y_pred = model.predict(X_test)
             mse = mean_squared_error(y_test, y_pred)
+          
             
             # Crear un nuevo DataFrame con resultados de pronóstico
-            forecast_data = pd.DataFrame({'Fecha': X_test.flatten(), 'Valor Real': y_test, 'Valor Pronosticado': y_pred})
+            forecast_data = pd.DataFrame({'Fecha': X_test.flatten(), 'Valor Real': y_test, 'Valor Pronosticado': y_pred, 'Erro medio cuadrático': mse})
             
             # Guardar el DataFrame en un archivo Excel
-            forecast_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'forecast_result.xlsx')
+            forecast_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'pronósticos.xlsx')
             forecast_data.to_excel(forecast_filename, index=False)
-            
-            return send_file(forecast_filename, as_attachment=True)
+            path_doc_dowload='uploads\\pronósticos.xlsx'
+            return send_file(path_doc_dowload, as_attachment=True)
     
     return render_template('index.html')
 

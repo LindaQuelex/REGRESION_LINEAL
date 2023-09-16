@@ -8,7 +8,7 @@ from io import BytesIO
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'tu_proyecto\\uploads'
+UPLOAD_FOLDER = 'docs\\uploads'
 ALLOWED_EXTENSIONS = {'xlsx','cvs'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

@@ -37,7 +37,10 @@ def index():
 
             # Ejemplo: Linear Regression
             X = df.index.values.reshape(-1, 1)
-            y = df['cantidad mensual'].values
+            y = df['CANTIDAD ANUAL'].values
+            estudio= df['NOMBRE DEL ESTUDIO'].values
+            año= df['AÑO'].values
+            
             
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
             model = LinearRegression()
@@ -48,14 +51,14 @@ def index():
           
             
             # Crear un nuevo DataFrame con resultados de pronóstico
-            forecast_data = pd.DataFrame({'Fecha': X_test.flatten(), 'Valor Real': y_test, 'Valor Pronosticado': y_pred, 'Erro medio cuadrático': mse})
+            forecast_data = pd.DataFrame({'FLATTEN': X_test.flatten(),  'CANTIDAD ANUAL REAL': y_test, 'CANTIDAD ANUAL PRONOSTICADA': y_pred, 'ERROR MEDIO CUADRÁTICO': mse})
             
             # Guardar el DataFrame en un archivo Excel
             forecast_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'pronósticos.xlsx')
             forecast_data.to_excel(forecast_filename, index=False)
             path_doc_dowload='uploads\\pronósticos.xlsx'
             return send_file(path_doc_dowload, as_attachment=True)
-    
+        
     return render_template('index.html')
 
 if __name__ == '__main__':

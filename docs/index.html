@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+
+
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -302,6 +304,30 @@
 
   <!-- Template Main JS File -->
   <script src="static/js/main.js"></script>
+  <!-- Incluir SheetJS desde un CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const fileInput = document.getElementById('fileInput');
+        const excelTableContainer = document.getElementById('excelTable');
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const binary = e.target.result;
+                    const workbook = XLSX.read(binary, { type: 'binary' });
+                    const sheetName = workbook.SheetNames[0];
+                    const data = XLSX.utils.sheet_to_html(workbook.Sheets[sheetName]);
+                    excelTableContainer.innerHTML = data;
+                };
+                reader.readAsBinaryString(file);
+            }
+        });
+    });
+  </script>
 
 </body>
 

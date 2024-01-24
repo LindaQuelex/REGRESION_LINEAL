@@ -5,6 +5,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from io import BytesIO
+from pycaret.internal.pycaret_experiment import TimeSeriesExperiment
 
 app = Flask(__name__)
 
